@@ -11,6 +11,7 @@ async function getWeatherData(cityInput) {
   const weatherData = await getWeaterDataFromServer(cityInput)
   // return object with all the available/needed weather data for app
   const appWeatherObject = {
+    cityName: getCityName(weatherData),
     weatherDesc: getWeatherDesc(weatherData),
     temperatureKelvin: getTemperatureKelvin(weatherData),
     cloudinessPercentage: getCloudinessPercentage(weatherData),
@@ -22,7 +23,14 @@ async function getWeatherData(cityInput) {
   return appWeatherObject
 }
 
-getWeatherData('stuttgart').then((data) => console.log(data))
+function displayWeatherData() {
+  const locationInput = userLocationInput.value
+  getWeatherData(locationInput).then((data) => console.log(data))
+}
+
+function getCityName(weatherObject) {
+  return weatherObject.name
+}
 
 function getWeatherDesc(weatherObject) {
   return weatherObject.weather[0].description
@@ -54,3 +62,7 @@ function getSnowVolumeOneHour(weatherObject) {
   // First check if snow is given then return appropriately
   return weatherObject.snow ? weatherObject.snow['1h'] : false
 }
+
+const userLocationInput = document.querySelector('#userLocationInput')
+const getWeatherButton = document.querySelector('#getWeatherButton')
+getWeatherButton.addEventListener('click', displayWeatherData)

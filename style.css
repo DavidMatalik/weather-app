@@ -1,5 +1,12 @@
-div {
-  background-color: red;
-  width: 100px;
-  height: 100px;
+h1 {
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+body {
+  text-align: center;
+}
+
+button:hover {
+  cursor: pointer;
 }
