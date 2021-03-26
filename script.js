@@ -10,36 +10,46 @@ async function getWeaterDataFromServer(city) {
 async function getWeatherData(cityInput) {
   const weatherData = await getWeaterDataFromServer(cityInput)
   // return object with all the available/needed weather data for app
-  const weatherDesc = getWeatherDesc(weatherData)
-  console.log(weatherDesc)
+  const appWeatherObject = {
+    weatherDesc: getWeatherDesc(weatherData),
+    temperatureKelvin: getTemperatureKelvin(weatherData),
+    cloudinessPercentage: getCloudinessPercentage(weatherData),
+    humidityPercentage: getHumidityPercentage(weatherData),
+    // Implement error handling for the 3 below
+    // windspeed: getWindSpeed(weatherData),
+    // rainVolumeLastHour: getRainVolumeOneHour(weatherData),
+    // snowVolumeLastHour: getSnowVolumeOneHour(weatherData),
+  }
+  return appWeatherObject
 }
-
-getWeatherData('paris')
 
 function getWeatherDesc(weatherObject) {
   return weatherObject.weather[0].description
 }
 
 function getTemperatureKelvin(weatherObject) {
-  // data.main.temp
+  return weatherObject.main.temp
 }
 
 function getCloudinessPercentage(weatherObject) {
-  // data.clouds.all
+  return weatherObject.clouds.all
 }
 
 function getHumidityPercentage(weatherObject) {
-  // data.main.humidity
+  return weatherObject.main.humidity
 }
 
 function getWindSpeed(weatherObject) {
+  return weatherObject.wind.speed
   // return false or 0 if there is no such parameter
 }
 
-function getRainVolume(weatherObject) {
+function getRainVolumeOneHour(weatherObject) {
+  return weatherObject.rain['1h']
   // return false or 0 if there is no such parameter
 }
 
-function getSnowVolume(weatherObject) {
+function getSnowVolumeOneHour(weatherObject) {
+  return weatherObject.wind['1h']
   // return false or 0 if there is no such parameter
 }
