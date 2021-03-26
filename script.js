@@ -15,13 +15,14 @@ async function getWeatherData(cityInput) {
     temperatureKelvin: getTemperatureKelvin(weatherData),
     cloudinessPercentage: getCloudinessPercentage(weatherData),
     humidityPercentage: getHumidityPercentage(weatherData),
-    // Implement error handling for the 3 below
-    // windspeed: getWindSpeed(weatherData),
-    // rainVolumeLastHour: getRainVolumeOneHour(weatherData),
-    // snowVolumeLastHour: getSnowVolumeOneHour(weatherData),
+    windSpeed: getWindSpeed(weatherData),
+    rainVolumeLastHour: getRainVolumeOneHour(weatherData),
+    snowVolumeLastHour: getSnowVolumeOneHour(weatherData),
   }
   return appWeatherObject
 }
+
+getWeatherData('stuttgart').then((data) => console.log(data))
 
 function getWeatherDesc(weatherObject) {
   return weatherObject.weather[0].description
@@ -40,16 +41,16 @@ function getHumidityPercentage(weatherObject) {
 }
 
 function getWindSpeed(weatherObject) {
-  return weatherObject.wind.speed
-  // return false or 0 if there is no such parameter
+  // First check if wind is given then return appropriately
+  return weatherObject.wind ? weatherObject.wind.speed : false
 }
 
 function getRainVolumeOneHour(weatherObject) {
-  return weatherObject.rain['1h']
-  // return false or 0 if there is no such parameter
+  // First check if rain is given then return appropriately
+  return weatherObject.rain ? weatherObject.rain['1h'] : false
 }
 
 function getSnowVolumeOneHour(weatherObject) {
-  return weatherObject.wind['1h']
-  // return false or 0 if there is no such parameter
+  // First check if snow is given then return appropriately
+  return weatherObject.snow ? weatherObject.snow['1h'] : false
 }
