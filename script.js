@@ -1,3 +1,8 @@
+const userLocationInput = document.querySelector('#userLocationInput')
+const getWeatherButton = document.querySelector('#getWeatherButton')
+const weatherInformation = document.querySelector('#weatherContainer')
+getWeatherButton.addEventListener('click', displayWeatherData)
+
 //Implement some errorhandling if e.g. city isn't found or server isn't available
 async function getWeaterDataFromServer(city) {
   const response = await fetch(
@@ -25,7 +30,20 @@ async function getWeatherData(cityInput) {
 
 function displayWeatherData() {
   const locationInput = userLocationInput.value
-  getWeatherData(locationInput).then((data) => console.log(data))
+  // getWeatherData(locationInput).then((data) => console.log(data))
+  getWeatherData(locationInput).then((data) => {
+    for (const property in data) {
+      if (data[property] || data[property] === 0) {
+        const p = document.createElement('p')
+        p.innerHTML = `${property}: ${data[property]}`
+        weatherInformation.appendChild(p)
+      }
+    }
+    // let markup = `
+    // <p>City: ${data.cityName}</p>`
+
+    // weatherInformation.innerHTML = markup
+  })
 }
 
 function getCityName(weatherObject) {
@@ -62,7 +80,3 @@ function getSnowVolumeOneHour(weatherObject) {
   // First check if snow is given then return appropriately
   return weatherObject.snow ? weatherObject.snow['1h'] : false
 }
-
-const userLocationInput = document.querySelector('#userLocationInput')
-const getWeatherButton = document.querySelector('#getWeatherButton')
-getWeatherButton.addEventListener('click', displayWeatherData)
