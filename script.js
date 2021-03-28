@@ -16,34 +16,34 @@ async function getWeatherData(cityInput) {
   const weatherData = await getWeaterDataFromServer(cityInput)
   // return object with all the available/needed weather data for app
   const appWeatherObject = {
-    cityName: getCityName(weatherData),
-    weatherDesc: getWeatherDesc(weatherData),
-    temperatureKelvin: getTemperatureKelvin(weatherData),
-    cloudinessPercentage: getCloudinessPercentage(weatherData),
-    humidityPercentage: getHumidityPercentage(weatherData),
-    windSpeed: getWindSpeed(weatherData),
-    rainVolumeLastHour: getRainVolumeOneHour(weatherData),
-    snowVolumeLastHour: getSnowVolumeOneHour(weatherData),
+    city: getCityName(weatherData),
+    weather: getWeatherDesc(weatherData),
+    temperature: getTemperatureKelvin(weatherData) + ' K',
+    cloudiness: getCloudinessPercentage(weatherData) + ' %',
+    humidity: getHumidityPercentage(weatherData) + ' %',
+    wind: getWindSpeed(weatherData) + ' m/sec',
+    rain: getRainVolumeOneHour(weatherData) + ' mm/hour',
+    snow: getSnowVolumeOneHour(weatherData) + ' mm/hour',
   }
   return appWeatherObject
 }
 
 function displayWeatherData() {
   const locationInput = userLocationInput.value
-  // getWeatherData(locationInput).then((data) => console.log(data))
   getWeatherData(locationInput).then((data) => {
     for (const property in data) {
-      if (data[property] || data[property] === 0) {
+      // Display weather properties only if available
+      if (!data[property].includes('false')) {
         const p = document.createElement('p')
-        p.innerHTML = `${property}: ${data[property]}`
+        p.innerHTML = `${makeFirstLetterUpperCase(property)}: ${data[property]}`
         weatherInformation.appendChild(p)
       }
     }
-    // let markup = `
-    // <p>City: ${data.cityName}</p>`
-
-    // weatherInformation.innerHTML = markup
   })
+}
+
+function makeFirstLetterUpperCase(text) {
+  return text[0].toUpperCase() + text.slice(1)
 }
 
 function getCityName(weatherObject) {
