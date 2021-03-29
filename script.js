@@ -1,7 +1,9 @@
 const userLocationInput = document.querySelector('#userLocationInput')
 const getWeatherButton = document.querySelector('#getWeatherButton')
 const weatherInformation = document.querySelector('#weatherContainer')
+const body = document.querySelector('body')
 getWeatherButton.addEventListener('click', displayWeatherData)
+body.classList.add('sunny')
 
 //Implement some errorhandling if e.g. city isn't found or server isn't available
 async function getWeaterDataFromServer(city) {
@@ -39,7 +41,15 @@ function displayWeatherData() {
         weatherInformation.appendChild(p)
       }
     }
+    displayWeatherIcons(data.weather)
   })
+}
+
+// display appropriate icons in background
+function displayWeatherIcons(weather) {
+  iconClass = weather.toLowerCase()
+  body.className = ''
+  body.classList.add(iconClass)
 }
 
 function makeFirstLetterUpperCase(text) {
@@ -51,7 +61,7 @@ function getCityName(weatherObject) {
 }
 
 function getWeatherDesc(weatherObject) {
-  return weatherObject.weather[0].description
+  return weatherObject.weather[0].main
 }
 
 function getTemperatureKelvin(weatherObject) {

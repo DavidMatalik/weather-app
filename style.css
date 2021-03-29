@@ -7,6 +7,32 @@ body {
   text-align: center;
 }
 
+.clear {
+  background-image: url('img/sun.png');
+  background-repeat: repeat;
+}
+
+.rain,
+.drizzle {
+  background-image: url('img/rain.png');
+  background-repeat: repeat;
+}
+
+.thunderstorm {
+  background-image: url('img/thunderstorm.png');
+  background-repeat: repeat;
+}
+
+.clouds {
+  background-image: url('img/clouds.png');
+  background-repeat: repeat;
+}
+
+.snow {
+  background-image: url('img/snow.png');
+  background-repeat: repeat;
+}
+
 button:hover {
   cursor: pointer;
 }
