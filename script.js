@@ -3,6 +3,7 @@ const getWeatherButton = document.querySelector('#get-weather-button')
 const weatherInformation = document.querySelector('#weather-container')
 const body = document.querySelector('body')
 getWeatherButton.addEventListener('click', displayWeatherData)
+userLocationInput.addEventListener('keyup', onEnterDisplayWeatherData)
 body.classList.add('sunny')
 
 //Implement some errorhandling if e.g. city isn't found or server isn't available
@@ -62,6 +63,12 @@ function displayWeatherIcons(weather) {
 
 function makeFirstLetterUpperCase(text) {
   return text[0].toUpperCase() + text.slice(1)
+}
+
+function onEnterDisplayWeatherData(e) {
+  if (e.keyCode === 13) {
+    displayWeatherData()
+  }
 }
 
 function getCityName(weatherObject) {
