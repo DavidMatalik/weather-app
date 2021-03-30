@@ -4,7 +4,7 @@ body {
 
 header {
   padding: 30px;
-  background: #1abc9c;
+  background: #7868e6;
   color: white;
 }
 
@@ -29,14 +29,27 @@ input {
   outline: none;
 }
 
-#getWeatherButton {
+#get-weather-button {
   display: block;
-  margin: 20px auto 0 auto;
+  margin: 20px auto 30px auto;
   width: 90px;
   height: 35px;
   font-size: 20px;
   border-radius: 5px;
   border: 0.5px grey solid;
+  outline: none;
+}
+
+#weather-container {
+  background: #b8b5ff;
+  width: 500px;
+  margin: 0 auto 0 auto;
+  border-radius: 15px;
+}
+
+.weather-info-para {
+  padding: 10px;
+  font-size: 40px;
 }
 
 .clear {

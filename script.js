@@ -1,6 +1,6 @@
-const userLocationInput = document.querySelector('#userLocationInput')
-const getWeatherButton = document.querySelector('#getWeatherButton')
-const weatherInformation = document.querySelector('#weatherContainer')
+const userLocationInput = document.querySelector('#user-location-input')
+const getWeatherButton = document.querySelector('#get-weather-button')
+const weatherInformation = document.querySelector('#weather-container')
 const body = document.querySelector('body')
 getWeatherButton.addEventListener('click', displayWeatherData)
 body.classList.add('sunny')
@@ -33,16 +33,24 @@ async function getWeatherData(cityInput) {
 function displayWeatherData() {
   const locationInput = userLocationInput.value
   getWeatherData(locationInput).then((data) => {
+    removeOldWeather()
     for (const property in data) {
       // Display weather properties only if available
       if (!data[property].includes('false')) {
         const p = document.createElement('p')
         p.innerHTML = `${makeFirstLetterUpperCase(property)}: ${data[property]}`
+        p.classList.add('weather-info-para')
         weatherInformation.appendChild(p)
       }
     }
     displayWeatherIcons(data.weather)
   })
+}
+
+function removeOldWeather() {
+  while (weatherInformation.firstChild) {
+    weatherInformation.removeChild(weatherInformation.firstChild)
+  }
 }
 
 // display appropriate icons in background
