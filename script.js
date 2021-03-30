@@ -2,6 +2,7 @@ const userLocationInput = document.querySelector('#user-location-input')
 const getWeatherButton = document.querySelector('#get-weather-button')
 const weatherInformation = document.querySelector('#weather-container')
 const body = document.querySelector('body')
+const errorMessage = document.querySelector('#error-message')
 getWeatherButton.addEventListener('click', displayWeatherData)
 userLocationInput.addEventListener('keyup', onEnterDisplayWeatherData)
 body.classList.add('sunny')
@@ -12,7 +13,14 @@ async function getWeaterDataFromServer(city) {
     `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=24005874af3f6ec79ecc6fe8800f3104`,
     { mode: 'cors' }
   )
-  return response.json()
+  //Put this error related stuff below in extra function?
+  if (response.ok) {
+    return response.json()
+  } else if (response.status === 404) {
+    return Promise.reject('error 404')
+  } else {
+    return Promise.reject('some other error: ' + response.status)
+  }
 }
 
 async function getWeatherData(cityInput) {
@@ -31,21 +39,29 @@ async function getWeatherData(cityInput) {
   return appWeatherObject
 }
 
+// Many lines of code - Separate in helper funcs? Change to async/await?
 function displayWeatherData() {
   const locationInput = userLocationInput.value
-  getWeatherData(locationInput).then((data) => {
-    removeOldWeather()
-    for (const property in data) {
-      // Display weather properties only if available
-      if (!data[property].includes('false')) {
-        const p = document.createElement('p')
-        p.innerHTML = `${makeFirstLetterUpperCase(property)}: ${data[property]}`
-        p.classList.add('weather-info-para')
-        weatherInformation.appendChild(p)
+  getWeatherData(locationInput)
+    .then((data) => {
+      errorMessage.innerHTML = ''
+      removeOldWeather()
+      for (const property in data) {
+        // Display weather properties only if available
+        if (!data[property].includes('false')) {
+          const p = document.createElement('p')
+          p.innerHTML = `${makeFirstLetterUpperCase(property)}: ${
+            data[property]
+          }`
+          p.classList.add('weather-info-para')
+          weatherInformation.appendChild(p)
+        }
       }
-    }
-    displayWeatherIcons(data.weather)
-  })
+      displayWeatherIcons(data.weather)
+    })
+    .catch((e) => {
+      errorMessage.innerHTML = 'Something went wrong. Try again.'
+    })
 }
 
 function removeOldWeather() {

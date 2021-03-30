@@ -40,6 +40,11 @@ input {
   outline: none;
 }
 
+#error-message {
+  color: red;
+  margin-top: 5px;
+}
+
 #weather-container {
   background: #b8b5ff;
   width: 500px;
