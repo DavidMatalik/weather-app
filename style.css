@@ -18,6 +18,27 @@ header p {
   font-size: 30px;
 }
 
+input {
+  border: 0.5px grey solid;
+  width: 400px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 30px;
+  border-radius: 15px;
+  margin-top: 20px;
+  outline: none;
+}
+
+#getWeatherButton {
+  display: block;
+  margin: 20px auto 0 auto;
+  width: 90px;
+  height: 35px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 0.5px grey solid;
+}
+
 .clear {
   background-image: url('img/sun.png');
   background-repeat: repeat;
