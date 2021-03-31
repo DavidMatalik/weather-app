@@ -1,6 +1,7 @@
+let currentWeather = {}
 const userLocationInput = document.querySelector('#user-location-input')
 const getWeatherButton = document.querySelector('#get-weather-button')
-const weatherInformation = document.querySelector('#weather-container')
+const weatherContainer = document.querySelector('#weather-container')
 const body = document.querySelector('body')
 const errorMessage = document.querySelector('#error-message')
 getWeatherButton.addEventListener('click', displayWeatherData)
@@ -14,29 +15,27 @@ async function getWeaterDataFromServer(city) {
     { mode: 'cors' }
   )
   //Put this error related stuff below in extra function?
-  if (response.ok) {
-    return response.json()
-  } else if (response.status === 404) {
-    return Promise.reject('error 404')
-  } else {
-    return Promise.reject('some other error: ' + response.status)
-  }
+  return response.ok
+    ? response.json()
+    : response.status === 404
+    ? Promise.reject('error 404')
+    : Promise.reject('some other error: ' + response.status)
 }
 
 async function getWeatherData(cityInput) {
   const weatherData = await getWeaterDataFromServer(cityInput)
   // return object with all the available/needed weather data for app
-  const appWeatherObject = {
+  currentWeather = {
     city: getCityName(weatherData),
     weather: getWeatherDesc(weatherData),
-    temperature: getTemperatureKelvin(weatherData) + ' K',
+    temperature: getTemperatureCelsius(weatherData) + ' ',
     cloudiness: getCloudinessPercentage(weatherData) + ' %',
     humidity: getHumidityPercentage(weatherData) + ' %',
     wind: getWindSpeed(weatherData) + ' m/sec',
     rain: getRainVolumeOneHour(weatherData) + ' mm/hour',
     snow: getSnowVolumeOneHour(weatherData) + ' mm/hour',
   }
-  return appWeatherObject
+  return currentWeather
 }
 
 // Many lines of code - Separate in helper funcs? Change to async/await?
@@ -54,9 +53,25 @@ function displayWeatherData() {
             data[property]
           }`
           p.classList.add('weather-info-para')
-          weatherInformation.appendChild(p)
+          p.id = property
+          weatherContainer.appendChild(p)
         }
       }
+      // Das Zeug hier unten in extra Funktion(en)
+      const temperatureElement = weatherContainer.querySelector('#temperature')
+      const celsiusButton = document.createElement('button')
+      const fahrenheitButton = document.createElement('button')
+      celsiusButton.innerHTML = 'C'
+      celsiusButton.addEventListener('click', displayInCelsius)
+      celsiusButton.dataset.unit = 'celsius'
+      celsiusButton.id = 'celsius-button'
+      celsiusButton.classList.add('active-temperature-button')
+      fahrenheitButton.innerHTML = 'F'
+      fahrenheitButton.addEventListener('click', displayInFahrenheit)
+      fahrenheitButton.dataset.unit = 'fahrenheit'
+      fahrenheitButton.id = 'fahrenheit-button'
+      temperatureElement.insertAdjacentElement('afterend', fahrenheitButton)
+      temperatureElement.insertAdjacentElement('afterend', celsiusButton)
       displayWeatherIcons(data.weather)
     })
     .catch((e) => {
@@ -64,9 +79,23 @@ function displayWeatherData() {
     })
 }
 
+function displayInCelsius() {
+  this.previousSibling.innerHTML = 'Temperature: ' + currentWeather.temperature
+  this.classList.add('active-temperature-button')
+  this.nextSibling.classList.remove('active-temperature-button')
+}
+
+function displayInFahrenheit() {
+  const tempInFahrenheit = parseInt(currentWeather.temperature) * 1.8 + 32
+  this.previousSibling.previousSibling.innerHTML =
+    'Temperature: ' + tempInFahrenheit
+  this.classList.add('active-temperature-button')
+  this.previousSibling.classList.remove('active-temperature-button')
+}
+
 function removeOldWeather() {
-  while (weatherInformation.firstChild) {
-    weatherInformation.removeChild(weatherInformation.firstChild)
+  while (weatherContainer.firstChild) {
+    weatherContainer.removeChild(weatherContainer.firstChild)
   }
 }
 
@@ -95,8 +124,10 @@ function getWeatherDesc(weatherObject) {
   return weatherObject.weather[0].main
 }
 
-function getTemperatureKelvin(weatherObject) {
-  return weatherObject.main.temp
+function getTemperatureCelsius(weatherObject) {
+  const tempKelvin = weatherObject.main.temp
+  const tempCelsius = Math.round(tempKelvin - 273)
+  return tempCelsius
 }
 
 function getCloudinessPercentage(weatherObject) {

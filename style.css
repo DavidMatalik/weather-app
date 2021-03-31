@@ -46,15 +46,41 @@ input {
 }
 
 #weather-container {
-  background: #b8b5ff;
+  background: #e4fbff;
   width: 500px;
   margin: 0 auto 0 auto;
   border-radius: 15px;
+  border: 2px solid #7868e6;
 }
 
 .weather-info-para {
   padding: 10px;
   font-size: 40px;
+}
+
+#temperature {
+  display: inline;
+}
+
+#fahrenheit-button,
+#celsius-button {
+  font-size: 40px;
+  height: 45px;
+  width: 40px;
+  border: 0.5px grey solid;
+  outline: none;
+}
+
+#fahrenheit-button {
+  border-radius: 0 10px 10px 0;
+}
+
+#celsius-button {
+  border-radius: 10px 0 0 10px;
+}
+
+.active-temperature-button {
+  background-color: #b8b5ff;
 }
 
 .clear {
