@@ -1,6 +1,6 @@
 See app on: https://davidmatalik.github.io/weather-app/
 # Goals
--Use API to build an app
+- Use API to build an app
 - Use Promises
 - Use async/await
 - Catch errors
