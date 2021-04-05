@@ -9,3 +9,5 @@ Catch errors
 Implement client side form validation - only letters allowed in input field
 Modularize JS code
 Implement loading image while doing server request
+Style search field better - Move some space around cursor
+Style site nice - more 3D with shadow effects
