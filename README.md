@@ -9,5 +9,6 @@ See app on: https://davidmatalik.github.io/weather-app/
 - Implement client side form validation - only letters allowed in input field
 - Modularize JS code
 - Implement loading image while doing server request
+- Show standard location for app initialization
 - Style search field better - Move some space around cursor
 - Style site nice - more 3D with shadow effects
