@@ -11,12 +11,14 @@ header {
 h1 {
   font-weight: bold;
   font-size: 60px;
+  line-height: 70px;
   margin-top: 30px;
   margin-bottom: 60px;
 }
 
 header p {
-  font-size: 30px;
+  font-size: 25px;
+  line-height: 35px;
   margin: 20px;
 }
 
@@ -25,7 +27,7 @@ input {
   width: 400px;
   height: 40px;
   line-height: 40px;
-  font-size: 30px;
+  font-size: 25px;
   border-radius: 15px;
   margin-top: 80px;
   outline: none;
@@ -53,7 +55,7 @@ button:hover {
 
 #weather-container {
   background: #e4fbff;
-  width: 500px;
+  width: 400px;
   margin: 80px auto 100px auto;
   border-radius: 15px;
   border: 2px solid #7868e6;
@@ -61,7 +63,7 @@ button:hover {
 
 .weather-info-para {
   padding: 10px;
-  font-size: 40px;
+  font-size: 25px;
 }
 
 #temperature {
@@ -70,9 +72,10 @@ button:hover {
 
 #fahrenheit-button,
 #celsius-button {
-  font-size: 40px;
-  height: 45px;
-  width: 40px;
+  font-size: 25px;
+  height: 35px;
+  line-height: 35px;
+  width: 30px;
   border: 0.5px grey solid;
   outline: none;
 }
