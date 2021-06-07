@@ -11,11 +11,13 @@ header {
 h1 {
   font-weight: bold;
   font-size: 60px;
-  margin: 30px;
+  margin-top: 30px;
+  margin-bottom: 60px;
 }
 
 header p {
   font-size: 30px;
+  margin: 20px;
 }
 
 input {
@@ -25,7 +27,7 @@ input {
   line-height: 40px;
   font-size: 30px;
   border-radius: 15px;
-  margin-top: 20px;
+  margin-top: 80px;
   outline: none;
 }
 
@@ -52,7 +54,7 @@ button:hover {
 #weather-container {
   background: #e4fbff;
   width: 500px;
-  margin: 0 auto 0 auto;
+  margin: 80px auto 100px auto;
   border-radius: 15px;
   border: 2px solid #7868e6;
 }
