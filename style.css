@@ -65,10 +65,11 @@ button:hover {
 
 #weather-container {
   background: #e4fbff;
-  width: 400px;
+  width: 370px;
   margin: 80px auto 100px auto;
+  padding: 15px 0; 
   border-radius: 15px;
-  border: 2px solid #7868e6;
+  border: 2px solid #7868e68a;
 }
 
 .weather-info-para {
