@@ -8,9 +8,13 @@ getWeatherButton.addEventListener('click', displayWeatherContainer)
 userLocationInput.addEventListener('keyup', onEnterDisplayWeatherData)
 body.classList.add('sunny')
 
-async function displayWeatherContainer() {
+window.addEventListener('load', () => {
+  displayWeatherContainer()
+})
+
+async function displayWeatherContainer(startCity = 'stuttgart') {
   try {
-    const locationInput = userLocationInput.value
+    const locationInput = userLocationInput.value || startCity
     const weatherData = await getWeatherData(locationInput)
     clearErrorMessages()
     removeOldWeather()
