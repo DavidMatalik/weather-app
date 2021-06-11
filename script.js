@@ -71,9 +71,19 @@ function displayWeatherInformation(data) {
     // Display weather properties only if available
     if (!data[property].includes('false')) {
       const p = document.createElement('p')
-      p.innerHTML = `${makeFirstLetterUpperCase(property)}: ${data[property]}`
+      const propertySpan = document.createElement('span')
+      const valueSpan = document.createElement('span')
+
+      propertySpan.innerHTML = `${makeFirstLetterUpperCase(property)}: `
+      valueSpan.innerHTML = `${data[property]}`
+      
+      propertySpan.classList.add('weather-property')
+      valueSpan.classList.add('weather-value')
       p.classList.add('weather-info-para')
       p.id = property
+      
+      p.appendChild(propertySpan)
+      p.appendChild(valueSpan)
       weatherContainer.appendChild(p)
     }
   }
@@ -84,9 +94,11 @@ function createTemperatureSwitch() {
   const celsiusButton = createTemperatureButton('celsius')
   const fahrenheitButton = createTemperatureButton('fahrenheit')
 
+  temperatureElement.firstChild.classList.add('sm-pad-top')
   styleActiveTemperatureButton(celsiusButton)
-  temperatureElement.insertAdjacentElement('afterend', fahrenheitButton)
-  temperatureElement.insertAdjacentElement('afterend', celsiusButton)
+
+  temperatureElement.lastChild.appendChild(celsiusButton)
+  temperatureElement.lastChild.appendChild(fahrenheitButton)
 }
 
 function createTemperatureButton(unit) {

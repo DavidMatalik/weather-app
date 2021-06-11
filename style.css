@@ -75,10 +75,25 @@ button:hover {
 .weather-info-para {
   padding: 10px;
   font-size: 25px;
+  line-height: 35px;
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 40% 60%;
 }
 
-#temperature {
-  display: inline-block;
+.weather-property {
+  color: grey;
+  font-size: 15px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.weather-value {
+  text-align: left;
+}
+
+.sm-pad-top {
+  padding-top: 1.5px;
 }
 
 #fahrenheit-button,
