@@ -34,12 +34,13 @@ input {
   border: 0.5px grey solid;
   width: 400px;
   height: 40px;
-  line-height: 40px;
-  font-size: 25px;
+  line-height: 20px;
+  font-size: 20px;
   border-radius: 15px;
   margin-top: 80px;
   outline: none;
   color: #7868e6;
+  padding: 5px 15px;
 }
 
 button:hover {
@@ -50,13 +51,14 @@ button:hover {
   display: block;
   margin: 20px auto 30px auto;
   width: 130px;
-  height: 35px;
+  height: 45px;
   font-size: 20px;
   border-radius: 5px;
   border: 0.5px grey solid;
   outline: none;
   color: #7868e6;
   background-color: #efefef;
+  padding: 5px 0;
 }
 
 #error-message {
