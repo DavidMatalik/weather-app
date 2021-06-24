@@ -41,7 +41,10 @@ input {
   outline: none;
   color: #7868e6;
   padding: 5px 15px;
-  box-shadow: 4px 4px 8px;
+  box-shadow: 4px 4px 8px #7868e6;
+  -moz-box-shadow: 4px 4px 8px #7868e6;
+  -webkit-box-shadow: 4px 4px 8px #7868e6;
+  -webkit-appearance: none;
 }
 
 button:hover {
@@ -60,7 +63,7 @@ button:hover {
   color: #7868e6;
   background-color: #efefef;
   padding: 5px 0;
-  box-shadow: 2px 2px 4px;
+  box-shadow: 2px 2px 4px #7868e6;  
 }
 
 #error-message {
@@ -74,7 +77,6 @@ button:hover {
   margin: 80px auto 100px auto;
   padding: 15px 0; 
   border-radius: 15px;
-  border: 2px solid #7868e68a;
   box-shadow: 5px 5px 10px #7868e6;
 }
 
