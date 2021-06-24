@@ -147,6 +147,10 @@ button:hover {
   background-repeat: repeat;
 }
 
+footer {
+  font-size: 10px;
+}
+
 @media (max-width: 600px) {
   #weather-container{
     width: 90vw;
